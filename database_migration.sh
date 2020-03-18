@@ -5,3 +5,5 @@ sudo apt-get install postgresql-9.3
 python db_converter.py payroll.mysql payroll.psql
 sudo -u postgres createdb payroll
 
+# code to chane ip address
+sudo ifconfig etho xxx.xxx.xx.xx
