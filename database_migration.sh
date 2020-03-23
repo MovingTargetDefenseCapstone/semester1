@@ -1,9 +1,12 @@
-mysqldump --compatible=postgresql --default-character-set=utf8 -r payroll.mysql -u root payroll -p sploitme
+sudo mv /var/run/mysql-default /var/run/mysqld
+mysqldump --compatible=postgresql --default-character-set=utf8 -r payroll.mysql -u root payroll -p 
+# enter sploitme as password
 wget https://raw.github.com/lanyrd/mysql-postgresql-converter/master/db_converter.py
 chmod +rx db_converter.py
 sudo apt-get install postgresql-9.3
 python db_converter.py payroll.mysql payroll.psql
 sudo -u postgres createdb payroll
+# one more command needed
 
 # code to chane ip address
-sudo ifconfig etho xxx.xxx.xx.xx
+sudo ifconfig eth0 xxx.xxx.xx.xx
