@@ -1,13 +1,10 @@
 #!/bin/bash
 
 # build postgres database
-git clone https://github.com/MovingTargetDefenseCapstone/semester1.git
 sudo mv /var/run/mysql-default /var/run/mysqld
 mysqldump --compatible=postgresql --default-character-set=utf8 -r payroll.mysql -uroot payroll -psploitme 
-wget https://raw.github.com/lanyrd/mysql-postgresql-converter/master/db_converter.py
-chmod +rx db_converter.py
 sudo apt-get install postgresql-9.3
-python db_converter.py payroll.mysql payroll.psql
+python ~/semester1/db_converter.py payroll.mysql payroll.psql
 sudo -u postgres createdb payroll
 sudo chmod -rw ~/semester1/my_pg_hba.conf
 sudo cp ~/semester1/my_pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
