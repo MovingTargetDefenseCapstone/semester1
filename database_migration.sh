@@ -3,11 +3,12 @@
 # build postgres database
 sudo mv /var/run/mysql-default /var/run/mysqld
 mysqldump --compatible=postgresql --default-character-set=utf8 -r payroll.mysql -uroot payroll -psploitme 
-sudo apt-get install postgresql-9.3
+sudo apt-get -y install postgresql-9.3 
 python ~/semester1/db_converter.py payroll.mysql payroll.psql
 sudo -u postgres createdb payroll
 sudo chmod -rw ~/semester1/my_pg_hba.conf
 sudo cp ~/semester1/my_pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
+sudo chmod +rw ~/semester1/my_pg_hba.conf
 sudo service postgresql restart
 psql payroll -U postgres -f payroll.psql
 
