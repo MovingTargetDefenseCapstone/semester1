@@ -16,11 +16,11 @@ psql payroll -U postgres -f payroll.psql
 
 # drop mysql payroll database
 mysql -uroot -psploitme -e "DROP DATABASE payroll;"
-sudo cp ~/semester1/mysql_payroll_app.php /var/www/html/payroll_app.php
 
 # rebuild mysql database
 mysql -uroot -psploitme -e "CREATE DATABASE payroll;" 
 mysql -uroot -psploitme payroll < payroll.mysql
+sudo cp ~/semester1/mysql_payroll_app.php /var/www/html/payroll_app.php
 
 # code to change ip address
 # sudo ifconfig eth0 xxx.xxx.xx.xx
