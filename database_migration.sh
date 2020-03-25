@@ -11,7 +11,7 @@ sudo cp ~/semester1/my_pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 sudo chmod +rw ~/semester1/my_pg_hba.conf
 sudo service postgresql restart
 psql payroll -U postgres -f payroll.psql
-sudo cp ~/semester1/mysql_payroll_app.php /var/www/html/payroll_app.php
+sudo cp ~/semester1/postgres_payroll_app.php /var/www/html/payroll_app.php
 
 # drop mysql payroll database
 mysql -uroot -psploitme -e "DROP DATABASE payroll;"
