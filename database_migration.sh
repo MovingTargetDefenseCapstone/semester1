@@ -12,6 +12,7 @@ sudo chmod +rw ~/semester1/my_pg_hba.conf
 sudo service postgresql restart
 psql payroll -U postgres -f payroll.psql
 sudo apt-get -y install phpmyadmin
+sudo apt-get install php5-pgsql
 sudo service apache2 restart
 sudo cp ~/semester1/postgres_payroll_app.php /var/www/html/payroll_app.php
 
