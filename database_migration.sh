@@ -11,19 +11,20 @@ sudo cp ~/semester1/my_pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 sudo chmod +rw ~/semester1/my_pg_hba.conf
 sudo service postgresql restart
 psql payroll -U postgres -f payroll.psql
-sudo apt install phpmyadmin
+sudo apt-get -y install phpmyadmin
+sudo service apache2 restart
 sudo cp ~/semester1/postgres_payroll_app.php /var/www/html/payroll_app.php
 
 # drop mysql payroll database
 mysql -uroot -psploitme -e "DROP DATABASE payroll;"
 
 # rebuild mysql database
-mysql -uroot -psploitme -e "CREATE DATABASE payroll;" 
-mysql -uroot -psploitme payroll < payroll.mysql
-sudo cp ~/semester1/mysql_payroll_app.php /var/www/html/payroll_app.php
+#mysql -uroot -psploitme -e "CREATE DATABASE payroll;" 
+#mysql -uroot -psploitme payroll < payroll.mysql
+#sudo cp ~/semester1/mysql_payroll_app.php /var/www/html/payroll_app.php
 
 # drop postgres database
-sudo -u postgres dropdb payroll
+#sudo -u postgres dropdb payroll
 
 # code to change ip address
 # sudo ifconfig eth0 xxx.xxx.xx.xx
