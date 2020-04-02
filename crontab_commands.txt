@@ -1,0 +1,4 @@
+0,20,40 * * * * bash ~/semester1/mysql_py_to_mysql_php.sh
+5,25,45 * * * * bash ~/semester1/mysql_php_to_pg_php.sh
+10,30,50 * * * * bash ~/semester1/pg_php_to_pg_py.sh
+15,35,55 * * * * bash ~/semester1/pg_py_to_mysql_py.sh
