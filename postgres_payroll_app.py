@@ -3,13 +3,12 @@
 import cgi
 import cgitb
 cgitb.enable()
-import mysql.connector
-from mysql.connector import Error
+import psycopg2
 
 try:
-	conn = mysql.connector.connect(host='127.0.0.1', database='payroll', user='root', password='sploitme')
-except Error as e:
-	print("Connection failed:", e)
+	conn = psycopg2.connect(database="payroll",user="postgres")
+except psycopg2.DatabaseError as error:
+	print(error)
 
 form = cgi.FieldStorage()
 post = form.getvalue('s')
@@ -41,7 +40,7 @@ if post:
 	if not user:
 		user = ""
 	password = form.getvalue('password')
-	sql = "select username, first_name, last_name, salary from users where username = '{}' and password = '{}'".format(user, password)
+	sql = "select username, first_name, last_name, salary from users where username = '{}' and password = '{}';".format(user, password)
 	cursor = conn.cursor()
 	cursor.execute(sql)
 	rows = cursor.fetchall()
