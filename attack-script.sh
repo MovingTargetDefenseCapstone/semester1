@@ -9,9 +9,9 @@ then
 	FILE=~/users.csv
 	if test -f "$FILE"
 	then
-		echo "$(date)   -->    $DATABASE, $SERVER  -->   Attack Successful" >> ~/attack-log.txt
+		echo "$(date)   -->    $DATABASE, PHP  -->   Attack Successful" >> ~/attack-log.txt
 	else
-		echo "Attack Failed" >> ~/attack-log.txt
+		echo "$(date)   -->    $DATABASE, PHP  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
 elif [ $SERVER == "python" ]
@@ -21,9 +21,9 @@ then
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/ 
 	if test -f "$FILE"
 	then
-		echo "Attack Successful" >> ~/attack-log.txt
+		echo "$(date)   -->    $DATABASE, Python  -->   Attack Successful" >> ~/attack-log.txt
 	else
-		echo "Attack Failed" >> ~/attack-log.txt
+		echo "$(date)   -->    $DATABASE, Python  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
 else
