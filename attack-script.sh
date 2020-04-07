@@ -1,6 +1,6 @@
-TARGET = $1
-DATABASE = $2
-SERVER = $3
+TARGET=$1
+DATABASE=$2
+SERVER=$3
 
 if [ $SERVER == "php" ]
 then 
