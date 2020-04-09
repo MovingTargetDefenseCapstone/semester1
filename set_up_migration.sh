@@ -1,4 +1,5 @@
 sudo mv /var/run/mysql-default /var/run/mysqld
+sudo apt-get update
 sudo apt-get -y install postgresql-9.3
 sudo chmod -rw ~/semester1/my_pg_hba.conf
 sudo cp ~/semester1/my_pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
@@ -13,3 +14,4 @@ sudo cp ~/semester1/my-apache2.conf /etc/apache2/apache2.conf
 sudo service apache2 restart
 sudo apt-get -y install python2.7-dev libmysqlclient-dev
 sudo pip install psycopg2
+mysql -uroot -psploitme payroll < add_rows_to_users.mysql
