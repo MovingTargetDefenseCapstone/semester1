@@ -1,0 +1,64 @@
+USE payroll;
+
+DROP TABLE IF EXISTS first_names;
+CREATE TABLE first_names (
+    id int,
+    f_name varchar(30)
+);
+
+INSERT INTO first_names (id, f_name) 
+VALUES (0, 'Nick');
+INSERT INTO first_names (id, f_name) 
+VALUES (1, 'Tara');
+INSERT INTO first_names (id, f_name) 
+VALUES (2, 'Andre');
+INSERT INTO first_names (id, f_name) 
+VALUES (3, 'Devin');
+
+
+DROP TABLE IF EXISTS last_names;
+CREATE TABLE last_names (
+    id int,
+    l_name varchar(30)
+);
+
+
+INSERT INTO last_names (id, l_name) 
+VALUES (0, 'Smith');
+INSERT INTO last_names (id, l_name) 
+VALUES (1, 'Jones');
+INSERT INTO last_names (id, l_name) 
+VALUES (2, 'Walters');
+INSERT INTO last_names (id, l_name) 
+VALUES (3, 'Roth');
+INSERT INTO last_names (id, l_name) 
+VALUES (4, 'Robertson');
+INSERT INTO last_names (id, l_name) 
+VALUES (5, 'Wilson');
+INSERT INTO last_names (id, l_name) 
+VALUES (6, 'Erntz');
+
+
+DROP PROCEDURE IF EXISTS add_data;
+delimiter $$
+CREATE PROCEDURE add_data(loops INT)
+BEGIN
+        DECLARE i INT DEFAULT 1;
+        DECLARE f varchar(30) DEFAULT "";
+        DECLARE l varchar(30) DEFAULT "";
+        WHILE (i<=loops) DO
+               SET f = (SELECT f_name FROM first_names WHERE id=(i%4));
+               SET l = (SELECT l_name FROM last_names WHERE id=(i%7));
+               INSERT INTO users (Username, first_name, last_name, 
+               password, salary) 
+               VALUES (i, f, l, 'password1', 100 *(i%3) * (i%10) + 50000);
+               SET i=i+1;
+               
+        END WHILE;
+END$$
+
+-- argument is the number of rows added
+call add_data (1000);
+
+
+
