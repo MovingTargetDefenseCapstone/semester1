@@ -66,6 +66,6 @@ RETURNS integer AS '
   END;
 ' LANGUAGE 'plpgsql';
 
-SELECT add_data(1000, 'password1');
+SELECT add_data(10000, 'password1');
 
 
