@@ -1,3 +1,12 @@
+CREATE TABLE IF NOT EXISTS users (
+    Username varchar(30),
+    first_name varchar(30),
+    last_name varchar(30),
+    password varchar(40),
+    salary int
+);
+
+
 DROP TABLE IF EXISTS first_names;
 CREATE TABLE first_names (
     id int,
