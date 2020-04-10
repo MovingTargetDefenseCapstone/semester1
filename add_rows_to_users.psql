@@ -1,0 +1,62 @@
+DROP TABLE IF EXISTS first_names;
+CREATE TABLE first_names (
+    id int,
+    f_name varchar(30)
+);
+
+INSERT INTO first_names (id, f_name) 
+VALUES (0, 'Nick');
+INSERT INTO first_names (id, f_name) 
+VALUES (1, 'Tara');
+INSERT INTO first_names (id, f_name) 
+VALUES (2, 'Andre');
+INSERT INTO first_names (id, f_name) 
+VALUES (3, 'Devin');
+
+
+DROP TABLE IF EXISTS last_names;
+CREATE TABLE last_names (
+    id int,
+    l_name varchar(30)
+);
+
+
+INSERT INTO last_names (id, l_name) 
+VALUES (0, 'Smith');
+INSERT INTO last_names (id, l_name) 
+VALUES (1, 'Jones');
+INSERT INTO last_names (id, l_name) 
+VALUES (2, 'Walters');
+INSERT INTO last_names (id, l_name) 
+VALUES (3, 'Roth');
+INSERT INTO last_names (id, l_name) 
+VALUES (4, 'Robertson');
+INSERT INTO last_names (id, l_name) 
+VALUES (5, 'Wilson');
+INSERT INTO last_names (id, l_name) 
+VALUES (6, 'Erntz');
+
+
+
+CREATE OR REPLACE FUNCTION add_data(n integer, pw varchar(30)) 
+RETURNS integer AS '
+  DECLARE
+   i INTEGER;
+   l varchar(30);
+   f varchar(30);
+  BEGIN
+   i:=0;
+    WHILE i <=n LOOP
+	  f := (SELECT f_name FROM first_names WHERE id=(i%4));
+      l := (SELECT l_name FROM last_names WHERE id=(i%7));
+      INSERT INTO users (Username, first_name, last_name, 
+      password, salary) VALUES (i, f, l, pw, 100 *(i%3) * (i%10) + 50000);
+      i := i + 1;
+    END LOOP;
+    RETURN i;
+  END;
+' LANGUAGE 'plpgsql';
+
+SELECT add_data(1000, 'password1');
+
+
