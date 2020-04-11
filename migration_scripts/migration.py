@@ -13,6 +13,7 @@ for i in range(10):
 	while (mig == "NONE"):
 		rand_ind = random.randrange(4)
 		mig = migrations[current][rand_ind]
-	print(mig)
 	current = rand_ind
+	command = "./" + mig
+	os.system(command)
 	os.system("sleep 2s")

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-    Username varchar(30),
+    username varchar(30),
     first_name varchar(30),
     last_name varchar(30),
     password varchar(40),
@@ -58,7 +58,7 @@ RETURNS integer AS '
     WHILE i <=n LOOP
 	  f := (SELECT f_name FROM first_names WHERE id=(i%4));
       l := (SELECT l_name FROM last_names WHERE id=(i%7));
-      INSERT INTO users (Username, first_name, last_name, 
+      INSERT INTO users (username, first_name, last_name, 
       password, salary) VALUES (i, f, l, pw, 100 *(i%3) * (i%10) + 50000);
       i := i + 1;
     END LOOP;
