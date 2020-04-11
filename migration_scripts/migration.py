@@ -16,4 +16,4 @@ for i in range(10):
 	current = rand_ind
 	command = "./" + mig
 	os.system(command)
-	os.system("sleep 2s")
+	os.system("sleep 1s")

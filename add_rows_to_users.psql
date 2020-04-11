@@ -57,15 +57,15 @@ RETURNS integer AS '
    i:=0;
     WHILE i <=n LOOP
 	  f := (SELECT f_name FROM first_names WHERE id=(i%4));
-      l := (SELECT l_name FROM last_names WHERE id=(i%7));
-      INSERT INTO users (username, first_name, last_name, 
-      password, salary) VALUES (i, f, l, pw, 100 *(i%3) * (i%10) + 50000);
-      i := i + 1;
+      	  l := (SELECT l_name FROM last_names WHERE id=(i%7));
+          INSERT INTO users (username, first_name, last_name, 
+      	  password, salary) VALUES (i, f, l, pw, 100 *(i%3) * (i%10) + 50000);
+      	  i := i + 1;
     END LOOP;
     RETURN i;
   END;
 ' LANGUAGE 'plpgsql';
 
-SELECT add_data(10000, 'password1');
+SELECT add_data(50000, 'password1');
 
 
