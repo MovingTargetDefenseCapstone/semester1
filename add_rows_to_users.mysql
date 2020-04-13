@@ -68,7 +68,7 @@ BEGIN
 END$$
 
 -- argument is the number of rows added
-call add_data (50000);
+call add_data (25000);
 
 
 
