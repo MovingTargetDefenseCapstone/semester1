@@ -7,5 +7,7 @@ sudo rm /var/www/cgi-bin/payroll_app.py
 # drop postgres database
 sudo -u postgres dropdb payroll
 
+sudo updatedb
+
 echo "$(date)   -->    MySQL, PHP"
 echo "$(date)   -->    MySQL, PHP" >> ~/configuration_log.txt

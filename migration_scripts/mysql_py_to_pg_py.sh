@@ -8,5 +8,7 @@ sudo cp ~/semester1/postgres_payroll_app.py /var/www/cgi-bin/payroll_app.py
 # drop mysql database
 mysql -uroot -psploitme -e "DROP DATABASE payroll;"
 
+sudo updatedb
+
 echo "$(date)   -->    Postgresql, Python"
 echo "$(date)   -->    Postgresql, Python" >> ~/configuration_log.txt

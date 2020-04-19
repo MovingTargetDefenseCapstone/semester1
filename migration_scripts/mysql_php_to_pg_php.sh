@@ -8,5 +8,7 @@ sudo cp ~/semester1/postgres_payroll_app.php /var/www/html/payroll_app.php
 # drop mysql database
 mysql -uroot -psploitme -e "DROP DATABASE payroll;"
 
+sudo updatedb
+
 echo "$(date)   -->    Postgresql, PHP"
 echo "$(date)   -->    Postgresql, PHP" >> ~/configuration_log.txt

