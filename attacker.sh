@@ -2,7 +2,7 @@
 
 ATTACK=$1
 TARGET=$2
-SOURCe=$3
+SOURCE=$3
 
 if [ $ATTACK == "CVE-2015-3306" ]
 then
