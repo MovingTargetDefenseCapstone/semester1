@@ -21,9 +21,9 @@ then
 	mv ~/.sqlmap/output/$TARGET/dump/public/users.csv ~/ 
 	if test -f "$FILE"
 	then
-		echo "$(date)   -->    Postgresql, PHP  -->   Attack Successful" >> ~/attack-log.txt
+		echo "$(date)   -->    PostgreSQL, PHP  -->   Attack Successful" >> ~/attack-log.txt
 	else
-		echo "$(date)   -->    Postgresql, PHP  -->   Attack Failed" >> ~/attack-log.txt
+		echo "$(date)   -->    PostgreSQL, PHP  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
 elif [[ ($DATABASE == "mysql") && ($SERVER == "py") ]]
@@ -45,9 +45,9 @@ then
 	mv ~/.sqlmap/output/$TARGET/dump/public/users.csv ~/ 
 	if test -f "$FILE"
 	then
-		echo "$(date)   -->    Postgresql, Python  -->   Attack Successful" >> ~/attack-log.txt
+		echo "$(date)   -->    PostgreSQL, Python  -->   Attack Successful" >> ~/attack-log.txt
 	else
-		echo "$(date)   -->    Postgresql, Python  -->   Attack Failed" >> ~/attack-log.txt
+		echo "$(date)   -->    PostgreSQL, Python  -->   Attack Failed" >> ~/attack-log.txt
 	fi
 	rm ~/users.csv
 else

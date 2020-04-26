@@ -3,5 +3,5 @@ sudo rm /var/www/html/payroll_app.php
 
 sudo updatedb
 
-echo "$(date)   -->    Postgresql, Python"
-echo "$(date)   -->    Postgresql, Python" >> ~/configuration_log.txt
+echo "$(date)   -->    PostgreSQL, Python"
+echo "$(date)   -->    PostgreSQL, Python" >> ~/configuration_log.txt

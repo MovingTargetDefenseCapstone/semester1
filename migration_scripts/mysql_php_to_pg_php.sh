@@ -10,5 +10,5 @@ mysql -uroot -psploitme -e "DROP DATABASE payroll;"
 
 sudo updatedb
 
-echo "$(date)   -->    Postgresql, PHP"
-echo "$(date)   -->    Postgresql, PHP" >> ~/configuration_log.txt
+echo "$(date)   -->    PostgreSQL, PHP"
+echo "$(date)   -->    PostgreSQL, PHP" >> ~/configuration_log.txt

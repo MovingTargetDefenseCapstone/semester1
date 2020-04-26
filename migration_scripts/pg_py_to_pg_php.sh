@@ -3,5 +3,5 @@ sudo rm /var/www/cgi-bin/payroll_app.py
 
 sudo updatedb
 
-echo "$(date)   -->    Postgresql, PHP"
-echo "$(date)   -->    Postgresql, PHP" >> ~/configuration_log.txt
+echo "$(date)   -->    PostgreSQL, PHP"
+echo "$(date)   -->    PostgreSQL, PHP" >> ~/configuration_log.txt
