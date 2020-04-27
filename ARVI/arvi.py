@@ -77,17 +77,19 @@ def renew_data(tau):
 
     data_new = get_data()
     for l in range(data_new[1]):
-
+        cve_names=data_new[4+l*6]
         R=data_new[5+l*6]
         C=data_new[6+l*6]
         E=data_new[7+l*6]
         # Add attacking time
         for i in range(data_new[0]):
             for j in range(data_new[3+l*6]):
-                #eta = get_a(E[i][j],tau)
-                eta=1
+                eta = get_a(E[i][j],tau)
+                #eta=1
                 R[i][j]=R[i][j]*eta
                 C[i][j]=C[i][j]*eta
+                eta_key = str(l) + "-" + str(i) + "-" + str(j)
+                eta_dict[eta_key] = eta
 
         data_new[5+l*6]=R
         data_new[6+l*6]=C
@@ -241,6 +243,7 @@ def individual_state(alpha, datas, i):
         pi_C_sum = 0
         for l in range(L):
             Q=opt_data[3+l*6]
+            cve_names=opt_data[4+l*6]
             R=opt_data[5+l*6]
             C=opt_data[6+l*6]
             E=opt_data[7+l*6]
@@ -259,7 +262,9 @@ def individual_state(alpha, datas, i):
                 exp_score = E[j][max_a_index]
                 
                 # Calculate attack time
-                eta = get_a(exp_score, opt_tau)
+                eta_key = str(l) + "-" + str(j) + "-" + str(k)
+                eta = eta_dict[eta_key]
+                #eta = get_a(exp_score, opt_tau)
                 w_C = eta * unit_cost * opt_w[j]
                 w_C_sum += w_C
                 
@@ -283,12 +288,14 @@ def individual_state(alpha, datas, i):
             sum_p_tilde += (p_tilde * N[j])
         new_N = 1 + sum_p_tilde
         
+        returned_p_i = opt_w
+        returned_tau = opt_tau
         
         if V_max.value - V_min.value > e:
-            lock.acquire()
+            my_lock.acquire()
 
-            returned_p_i = opt_w
-            returned_tau = opt_tau
+            #returned_p_i = opt_w
+            #returned_tau = opt_tau
                 
             if i != fixed_state_r:
                 V_global[i] = opt_v
@@ -313,7 +320,7 @@ def individual_state(alpha, datas, i):
             print("*****************")
 
 
-            lock.release()
+            my_lock.release()
 
 
     return [returned_p_i, returned_tau]
@@ -326,7 +333,7 @@ num_simulation = 1000
 tau_min = 1
 tau_max = 1
 delta = 1
-e=0.1
+e=0.01
 taus = [tau_min+ i*delta for i in range (1+int((tau_max-tau_min)/delta))]
 
 gamma = tau_min
@@ -353,18 +360,23 @@ V_max = mp.Value('d', 10.0)
 V_min = mp.Value('d', 0.0)
 fixed_state_r = 0
 
+
+
+eta_dict = {}
+
+# creates lock to be shared between processes;
 def init(l):
-    global lock
-    lock = l
+    global my_lock
+    my_lock = l
 
 def ARVI(alpha, datas):
-    l = mp.Lock()
+    lock = mp.Lock()
     gVKN_list = [g_global, V_global, K_global, N_global]
     
     args_list = ([alpha, datas, i] for i in range(S))
     
     
-    pool = mp.Pool(mp.cpu_count(), initializer=init, initargs=(l,))
+    pool = mp.Pool(mp.cpu_count(), initializer=init, initargs=(lock,))
     t0 = time.time()
     results = pool.starmap(individual_state, args_list)
     pool.close()
@@ -396,4 +408,3 @@ tau_out.write(str(found_taus))
 msg_out.close()
 tau_out.close()
 p_out.close()
-
