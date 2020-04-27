@@ -2,7 +2,7 @@
 Most of this file comes from Henger Li's repo which can be found here:
 https://github.com/HengerLi/SPT-MTD/tree/master/RVI_MTD_e%3D0.01
 
-I created the ARVI and individual_state functions, as well as making changes to MinMaxARVI.
+I created the ARVI and individual_state functions based on functions in the sychronous version of this code, as well as making changes to MinMaxARVI.
 """
 
 from gurobipy import *
@@ -201,7 +201,7 @@ def MinMaxARVI(i, V, alpha, tau, data, g):
     except GurobiError:
         print('Error reported')
 
-
+# Calculates the P and tau values for a particular defender state
 def individual_state(alpha, datas, i):
     returned_p_i = 0
     returned_tau = [0 for x in range(datas[0][0])]
@@ -297,6 +297,7 @@ def individual_state(alpha, datas, i):
             #returned_p_i = opt_w
             #returned_tau = opt_tau
                 
+            # transmit global variables
             if i != fixed_state_r:
                 V_global[i] = opt_v
                 K_global[i] = new_K
@@ -322,13 +323,11 @@ def individual_state(alpha, datas, i):
 
             my_lock.release()
 
-
+    # returns row i of P*, as well as tau*
     return [returned_p_i, returned_tau]
 
 
-#Parameters
-#num_alpha = 1
-#alpha_coef = 0.1
+alpha = 0.1
 num_simulation = 1000
 tau_min = 1
 tau_max = 1
@@ -373,11 +372,13 @@ def ARVI(alpha, datas):
     lock = mp.Lock()
     gVKN_list = [g_global, V_global, K_global, N_global]
     
+    # generate arguments for each process
     args_list = ([alpha, datas, i] for i in range(S))
     
-    
+    # add lock as global variable to pool
     pool = mp.Pool(mp.cpu_count(), initializer=init, initargs=(lock,))
     t0 = time.time()
+    # pool contains a process for each defender state
     results = pool.starmap(individual_state, args_list)
     pool.close()
     pool.join()
@@ -386,7 +387,7 @@ def ARVI(alpha, datas):
     print("core number:"+str(mp.cpu_count()))
     return [gVKN_list, results]
 
-alpha = 0.1
+
 a = ARVI(alpha, process_data())
 
 states = a[1]
@@ -396,14 +397,14 @@ for i in states:
     found_p.append(i[0])
     found_taus.append(i[1])
 
-# output P to file
+# output P to MSG_P.txt
 for row in found_p:
     p_out.write(str(row)+'\n')
 
-# output tau to file
+# output tau to MSG_tau.txt
 tau_out.write(str(found_taus))
 
-# output globals
+# output global variables to MSG.txt
 g = a[0][0]
 V = a[0][1]
 K = a[0][2]
