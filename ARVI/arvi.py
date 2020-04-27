@@ -193,8 +193,6 @@ def MinMaxARVI(i, V, alpha, tau, data, g):
         for v in m.getVars()[0:S]:
             result.append(v.x)
         
-        # write model to file
-        #m.write("a_write.lp")
 
         return result
 
@@ -206,7 +204,6 @@ def individual_state(alpha, datas, i):
     returned_p_i = 0
     returned_tau = [0 for x in range(datas[0][0])]
     while V_max.value - V_min.value > e:
-        #g = g_global.value
         g = g_global[:]
         V = V_global[:]
         K = K_global[:]
@@ -294,8 +291,6 @@ def individual_state(alpha, datas, i):
         if V_max.value - V_min.value > e:
             my_lock.acquire()
 
-            #returned_p_i = opt_w
-            #returned_tau = opt_tau
                 
             # transmit global variables
             if i != fixed_state_r:

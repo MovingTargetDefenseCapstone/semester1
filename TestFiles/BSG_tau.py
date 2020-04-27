@@ -3,6 +3,8 @@
 Created on Mon Nov 25 14:58:27 2019
 
 @author: Henger
+
+Minor changes were made by Thomas Roginsky
 """
 
 import numpy
@@ -69,12 +71,10 @@ def renew_data(tau):
         E=data_new[7+l*6]
         
         # Add attacking time
-        #fe=open('eta.txt','w')
         for i in range(data_new[0]):
             for j in range(data_new[3+l*6]):
                 eta=get_a(E[i][j],tau)
-                #fe.write(str(eta))
-                #fe.write(', ')
+                
                 R[i][j]=R[i][j]*eta
                 C[i][j]=C[i][j]*eta   
         
@@ -87,7 +87,6 @@ def renew_data(tau):
 def process_data(tau_min, tau_max, delta):
     datas = []
     for tau in range(1+int((tau_max-tau_min)/delta)):
-        #datas.append(renew_data(data, tau_min+tau*delta))
         datas.append(renew_data(tau_min+tau*delta))
     return datas
 
@@ -98,10 +97,8 @@ import numpy
 def BSG(alpha,tau, data):
     #Create a new model
     m = Model("MIQP")
-    #f = open('data3.txt', 'r')
 
     # Add defender stategies to the model
-    #X = int(f.readline())
     X=data[0]
     x = []
     for i in range(X):
@@ -157,8 +154,6 @@ def BSG(alpha,tau, data):
 
     # subtract costs from the objective function
     obj = QuadExpr()
-    #alpha = float(sys.argv[2])
-    #alpha = 1
     two_step_configs = LinExpr()
     for i in range(X):
         for j in range(X):
@@ -167,22 +162,18 @@ def BSG(alpha,tau, data):
     m.addConstr( two_step_configs == 1 ) 
 
     ''' Start processing for attacker types '''
-    #L = int(f.readline())
     L = data[1]
     M = 100000000
 
     for l in range(L):
 
         # Probability of l-th attacker
-        #v = f.readline().strip()
-        #p = float(v)
+        
         p=data[2+l*6]
 
         # Add l-th attacker info to the model
-        #Q = int(f.readline())
         Q=data[3+l*6]
         q = []
-        #cve_names = f.readline().strip().split("|")
         cve_names=data[4+l*6]
         
         for i in range(Q):
@@ -222,20 +213,12 @@ def BSG(alpha,tau, data):
     # Solve MIQP
     m.optimize()
 
-    # Print out values
-    #def printSeperator():
-        #print ('---------------')
     results=[]
     results.append(-m.objVal/tau)
-    #printSeperator()
-    #for v in m.getVars():
+    
     for v in m.getVars()[0:X]:
         results.append(v.x)
-    #for v in m.getVars():   
-        #print('%s -> %g' % (v.varName, v.x))
 
-    #printSeperator()
-    #printSeperator()
     return results
 
 def BSG_tau(alpha, datas, tau_min, tau_max, delta):
@@ -263,9 +246,7 @@ delta = 5
 data = get_data()
 datas = process_data(tau_min, tau_max, delta)
 f = open('BSG_costs.txt','w+')
-#f0 = open('uBSG.txt','w+')
-#f1 = open('BSG_tau.txt','w+')
-#f2 = open('uBSG_P.txt','w+')
+
 costs = ''
 num_alpha = 10
 alpha_coef = 10
@@ -275,14 +256,7 @@ for alpha in range(num_alpha):
     print("r:")
     print(r)
     v.append(r[0])
-    #f1.write(str(r[1]))
-    #f1.write('\n')
-    #f2.write(str(r[1:data[0]+1]))
-    #f2.write('\n')
+    
     costs = costs + str(r[0]) + '\n'
 f.write(str(costs))
 f.close()
-#f0.write(str(v))
-#f0.close()
-#f1.close()
-#f2.close()

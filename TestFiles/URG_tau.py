@@ -3,6 +3,8 @@
 Created on Wed Nov 27 12:52:00 2019
 
 @author: Henger
+
+Minor changes were made by Thomas Roginsky
 """
 
 from gurobipy import *
@@ -21,7 +23,6 @@ def get_data():
     
     data=[]
     f = open('input.txt', 'r')
-    #f=open('3_layer.txt','r')
     X = int(f.readline())
     data.append(X)
     L = int(f.readline())
@@ -70,16 +71,14 @@ def renew_data(tau):
         C=data_new[6+l*6]
         E=data_new[7+l*6]
         # Add attacking time
-        #f0=open('eta.txt','w')
         for i in range(data_new[0]):
             for j in range(data_new[3+l*6]):
                 eta=get_a(E[i][j],tau)
-                #f0.write(str(eta))
-                #f0.write(', ')
+                
                 R[i][j]=R[i][j]*eta
                 C[i][j]=C[i][j]*eta   
         
-        #f0.close()
+        
         data_new[5+l*6]=R
         data_new[6+l*6]=C
         
@@ -99,15 +98,7 @@ def URG(alpha, tau, data):
     #Create a new model
     m = Model("MILP")
     
-    #f= open('data3.txt','r')
-    #if layer == 1:
-        #f = open('1-layer.txt', 'r')
-    #else layer == 2:
-     #   f = open('2-layer.txt', 'r')
-    #else:
-      #  f = open('3-layer.txt', 'r')
-    # Add defender stategies to the model
-    #X = int(f.readline())
+    
     X=data[0]
     
     
@@ -120,29 +111,25 @@ def URG(alpha, tau, data):
     # subtract costs from the objective function
     obj = QuadExpr()
 
-    #alpha = 1
+    
     for i in range(X):
         for j in range(X):
             obj.add( alpha * cost[i][j]/(X*X), -1)
-            #two_step_configs.add( w[i][j] )
-    #m.addConstr( two_step_configs == 1 ) 
+            
 
     ''' Start processing for attacker types '''
-    #L = int(f.readline())
+    
     L=data[1]
     M = 100000000
 
     for l in range(L):
 
         # Probability of l-th attacker
-        #v = f.readline().strip()
-        #p = float(v)
+        
         p=data[2+l*6]
         # Add l-th attacker info to the model
-        #Q = int(f.readline())
         Q=data[3+l*6]
         q = []
-        #cve_names = f.readline().strip().split("|")
         cve_names=data[4+l*6]
         for i in range(Q):
             n = str(l)+'-'+cve_names[i]
@@ -197,8 +184,7 @@ delta = 5
 data = get_data()
 datas = process_data(tau_min, tau_max, delta)
 f = open('URG_costs.txt','w+')
-#f0=open('URG.txt','w')
-#f1=open('URG_tau.txt','w')
+
 num_alpha = 10
 alpha_coef = 10
 costs = ''
@@ -209,10 +195,7 @@ for alpha in range(num_alpha):
     costs = costs + str(r) + '\n'
     #obj=min(r)
     #v.append(r)
-    #f1.write(str(r.index(obj)*delta+tau_min))
-    #f1.write('\n')
 
-#f0.write(str(r))
+
+
 f.write(str(costs))
-#f0.close()
-#f1.close()
