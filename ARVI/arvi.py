@@ -403,7 +403,23 @@ for row in found_p:
 # output tau to file
 tau_out.write(str(found_taus))
 
-
+# output globals
+g = a[0][0]
+V = a[0][1]
+K = a[0][2]
+N = a[0][3]
+msg_out.write("g:")
+for i in g:
+    msg_out.write(" " + str(i))
+msg_out.write("\nV:")
+for i in V:
+    msg_out.write(" " + str(i))
+msg_out.write("\nK:")
+for i in K:
+    msg_out.write(" " + str(i))
+msg_out.write("\nN:")
+for i in N:
+    msg_out.write(" " + str(i))
 
 msg_out.close()
 tau_out.close()
