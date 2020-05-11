@@ -3,6 +3,9 @@ import time
 import sys
 import random
 import os
+
+os.system('sudo mv /var/run/mysql-default /var/run/mysqld')
+
 P = [[0.2, 0.4, 0.2, 0.2],
      [0.3, 0.1, 0.1, 0.5],
      [0.2, 0.5, 0.2, 0.1],
