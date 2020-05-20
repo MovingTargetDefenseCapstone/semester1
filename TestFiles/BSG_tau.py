@@ -246,6 +246,9 @@ delta = 5
 data = get_data()
 datas = process_data(tau_min, tau_max, delta)
 f = open('BSG_costs.txt','w+')
+f0 = open('uBSG.txt','w+')
+f1 = open('BSG_tau.txt','w+')
+f2 = open('uBSG_P.txt','w+')
 
 costs = ''
 num_alpha = 10
@@ -256,7 +259,19 @@ for alpha in range(num_alpha):
     print("r:")
     print(r)
     v.append(r[0])
+
+    f1.write(str(r[1]))
+    f1.write('\n')
+    #f2.write(",".join(str(x) for x in r[2]))
+    f2.write(str(r[1:data[0]+1]))
+    f2.write('\n')
+
+
     
     costs = costs + str(r[0]) + '\n'
 f.write(str(costs))
 f.close()
+f0.write(str(v))
+f0.close()
+f1.close()
+f2.close()

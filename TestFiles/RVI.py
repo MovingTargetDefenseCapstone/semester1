@@ -47,6 +47,11 @@ Cost = [[update_cost, 0.101, 0.588, 0.612],
 S = len(Cost)
 data_file = 'input.txt'
 output_msg = 'MSG.txt'
+output_tau = 'MSG_tau.txt'
+output_p = 'MSG_P.txt'
+output_t = 'MSG_t.txt'
+output_v = 'MSG_V.txt'
+
 
 
 
@@ -276,6 +281,9 @@ def SMSG(alpha, datas):
     return [str(V[fix]), f1, f2, f3, f4]
 
 
+
+
+
 if __name__=='__main__':
 
     # paralell computing
@@ -290,6 +298,10 @@ if __name__=='__main__':
 
     # write data to files
     f_msg=open(output_msg,'w+')
+    f_tau=open(output_tau,'w+')
+    f_p=open(output_p,'w+')
+    f_t=open(output_t,'w+')
+    f_v = open(output_v, 'w+')
 
     for i in all_results:
         a_msg = i[0]
@@ -298,7 +310,19 @@ if __name__=='__main__':
         a_t = i[3]
         a_v = i[4]
         f_msg.write(str(a_msg)+'\n')
+        f_tau.write(str(a_tau)+ '\n')
+        f_p.write(str(a_p)+'\n')
+        f_t.write(str(a_t)+'\n')
+        f_v.write(str(a_v) +'\n')
+        
         
 
     
     f_msg.close()
+    f_msg.close()
+    f_tau.close()
+    f_p.close()
+    f_t.close()
+    f_v.close()
+
+    
