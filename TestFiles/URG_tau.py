@@ -9,6 +9,7 @@ Minor changes were made by Thomas Roginsky
 
 from gurobipy import *
 import numpy
+import sys
 
 
 import numpy
@@ -178,15 +179,15 @@ def URG_tau(alpha, datas, tau_min, tau_max, delta):
     return min(v)
 
 v=[]
-tau_min = 5
-tau_max = 30
-delta = 5
+tau_min = float(sys.argv[1])
+tau_max = float(sys.argv[2])
+delta = float(sys.argv[3])
 data = get_data()
 datas = process_data(tau_min, tau_max, delta)
 f = open('URG_costs.txt','w+')
 
 num_alpha = 10
-alpha_coef = 10
+alpha_coef = float(sys.argv[4])
 costs = ''
 for alpha in range(num_alpha):
     r=URG_tau(alpha*alpha_coef, datas, tau_min, tau_max, delta)

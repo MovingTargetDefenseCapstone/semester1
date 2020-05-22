@@ -11,17 +11,18 @@ import numpy as np
 import time
 import multiprocessing as mp
 import math
+import sys
 
 #Parameters
 
 num_simulation = 1000
-tau_min = 5
-tau_max = 30
-delta = 5
+tau_min = float(sys.argv[1])
+tau_max = float(sys.argv[2])
+delta = float(sys.argv[3])
 e=0.01
 taus = [tau_min+ i*delta for i in range (1+int((tau_max-tau_min)/delta))]
 num_alpha = 10
-alpha_coef = 10
+alpha_coef = float(sys.argv[4])
 #alpha_min = 0.1
 #alpha_max = 1.1
 

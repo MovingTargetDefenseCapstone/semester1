@@ -8,6 +8,7 @@ Minor changes were made by Thomas Roginsky
 """
 
 import numpy
+import sys
 def get_a(ES,tau):
     sum = 0
     for i in range(1000):
@@ -240,9 +241,9 @@ def BSG_tau(alpha, datas, tau_min, tau_max, delta):
     return results
 
 v=[]
-tau_min = 5
-tau_max = 30
-delta = 5
+tau_min = float(sys.argv[1])
+tau_max = float(sys.argv[2])
+delta = float(sys.argv[3])
 data = get_data()
 datas = process_data(tau_min, tau_max, delta)
 f = open('BSG_costs.txt','w+')
@@ -252,7 +253,7 @@ f2 = open('uBSG_P.txt','w+')
 
 costs = ''
 num_alpha = 10
-alpha_coef = 10
+alpha_coef = float(sys.argv[4])
 for alpha in range(num_alpha):
     r=BSG_tau(alpha*alpha_coef, datas, tau_min, tau_max, delta)
     #r=BSG((alpha+1)*alpha_coef, 1.0, data)
